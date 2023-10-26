@@ -4,7 +4,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
 using UnityEngine.InputSystem;
 #endif
 
@@ -1437,7 +1437,7 @@ namespace AdvancedInputFieldPlugin
 			if(dragOutOfBounds)
 			{
 				Vector2 localMousePosition;
-#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(textAreaTransform, Mouse.current.position.ReadValue(), InputField.GetComponentInParent<Canvas>().worldCamera, out localMousePosition);
 #else
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(textAreaTransform, Input.mousePosition, InputField.GetComponentInParent<Canvas>().worldCamera, out localMousePosition);
