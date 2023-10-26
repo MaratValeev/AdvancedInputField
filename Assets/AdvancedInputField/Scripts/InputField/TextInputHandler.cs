@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
 using UnityEngine.InputSystem;
 #endif
 
@@ -224,10 +224,10 @@ namespace AdvancedInputFieldPlugin
 		{
 			if(actionBar != null)
 			{
-#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
 				if(Mouse.current.leftButton.wasReleasedThisFrame) //Left mouse button was clicked
 #else
-				if(Input.GetMouseButtonUp(0)) //Left mouse button was clicked
+                if (Input.GetMouseButtonUp(0)) //Left mouse button was clicked
 #endif
 				{
 					if(lastTapTime > 0 && Time.realtimeSinceStartup - lastTapTime <= Settings.DoubleTapThreshold)
@@ -248,10 +248,10 @@ namespace AdvancedInputFieldPlugin
 					lastTapTime = Time.realtimeSinceStartup;
 					TextNavigator.HideActionBar();
 				}
-#if ENABLE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM && !ENABLE_LEGACY_INPUT_MANAGER
 				else if(Mouse.current.rightButton.wasReleasedThisFrame) //Right mouse button was clicked
 #else
-				else if(Input.GetMouseButtonUp(1)) //Right mouse button was clicked
+                else if (Input.GetMouseButtonUp(1)) //Right mouse button was clicked
 #endif
 				{
 					if(Engine.HasSelection)
